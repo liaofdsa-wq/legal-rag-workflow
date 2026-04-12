@@ -64,7 +64,7 @@ python scripts\03_embed_fixed_800_200_baseline.py
 python app.py
 ```
 
-## scripts 執行順序
+## 08scripts 執行順序
 
 `08_leaf_json_embedding_問答/法規資料_md_clean_leaf_json/scripts` 的主線順序是：
 
