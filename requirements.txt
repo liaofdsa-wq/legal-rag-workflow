@@ -1,0 +1,8 @@
+pdfplumber
+numpy
+pandas
+requests
+streamlit
+sentence-transformers
+openpyxl
+pillow

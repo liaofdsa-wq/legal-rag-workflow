@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+.venv/
+venv/
+env/
+.env
+
+.DS_Store
+Thumbs.db
+
+.streamlit/secrets.toml
+
+# Local runtime logs / temporary exports
+*.log
+*.tmp
+~$*
