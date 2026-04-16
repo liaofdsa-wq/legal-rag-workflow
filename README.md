@@ -38,7 +38,7 @@ python app.py
 ## 怎麼跑
 
 ```powershell
-cd C:\Users\user\Desktop\大三下\EY\法規資料_整理保留_20260412
+cd <此資料夾>
 
 # PDF -> Markdown，輸出到 03
 python 02_PDF轉Markdown程式\提md.py
