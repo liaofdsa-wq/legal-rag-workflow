@@ -6,10 +6,10 @@
 
 ## 快速啟動
 
-第一次使用先安裝依賴：
+第一次使用現在資料夾先安裝依賴：
 
 ```powershell
-cd C:\Users\user\Desktop\大三下\EY\法規資料_整理保留_20260412
+
 pip install -r requirements.txt
 ```
 
