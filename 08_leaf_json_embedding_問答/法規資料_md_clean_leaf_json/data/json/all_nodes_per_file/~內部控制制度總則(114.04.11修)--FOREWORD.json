@@ -542,6 +542,21 @@
   },
   {
     "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
+    "node_name": "第一款",
+    "sibling_order": 1,
+    "path_key": "5.5.1",
+    "path_names": [
+      "五、",
+      "(五)",
+      "第一款"
+    ],
+    "pages": [
+      8
+    ],
+    "content": "第一款之董事行為準則至少應包括董事發現本事業有受重大損害之虞時，應儘速妥適處理，立即通知審計委\n員會或審計委員會之獨立董事成員或監察人並提報董事會，且應督導公司通報主管機關。"
+  },
+  {
+    "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
     "node_name": "六、",
     "sibling_order": 6,
     "path_key": "6",
@@ -2193,7 +2208,7 @@
   },
   {
     "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
-    "node_name": "ii.",
+    "node_name": "i.",
     "sibling_order": 1,
     "path_key": "15.3.2.2.1",
     "path_names": [
@@ -2201,6 +2216,24 @@
       "(三)",
       "2.",
       "(2)",
+      "i."
+    ],
+    "pages": [
+      28
+    ],
+    "content": "i.就內部業務性質、作業流程等，以風險為基礎，辨識公司高風險項目。"
+  },
+  {
+    "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
+    "node_name": "ii.",
+    "sibling_order": 1,
+    "path_key": "15.3.2.2.1.1",
+    "path_names": [
+      "十五、",
+      "(三)",
+      "2.",
+      "(2)",
+      "i.",
       "ii."
     ],
     "pages": [
@@ -2213,12 +2246,13 @@
     "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
     "node_name": "iii.",
     "sibling_order": 2,
-    "path_key": "15.3.2.2.2",
+    "path_key": "15.3.2.2.1.2",
     "path_names": [
       "十五、",
       "(三)",
       "2.",
       "(2)",
+      "i.",
       "iii."
     ],
     "pages": [
@@ -2230,12 +2264,13 @@
     "file_name": "~內部控制制度總則(114.04.11修)--FOREWORD.md",
     "node_name": "iv.",
     "sibling_order": 3,
-    "path_key": "15.3.2.2.3",
+    "path_key": "15.3.2.2.1.3",
     "path_names": [
       "十五、",
       "(三)",
       "2.",
       "(2)",
+      "i.",
       "iv."
     ],
     "pages": [

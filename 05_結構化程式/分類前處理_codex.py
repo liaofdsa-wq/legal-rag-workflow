@@ -9,7 +9,7 @@ from typing import Dict, List, Tuple
 
 # Codex 副本：
 # 1. 不覆蓋原始「結構化法規程式/分類前處理.py」
-# 2. build_tree_pipeline 的輸出改到 tree_codex，方便和原 tree 對照
+# 2. build_tree_pipeline 輸出到 tree，供後續 leaf JSON 建置使用
 
 # 1. 路徑定義 (保持你提供的結構)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,7 +55,7 @@ def rewrite_page_markers(working_dir):
         # 👉 覆寫原檔
         md_file.write_text("\n".join(new_lines), encoding="utf-8")
 
-    print("✅ 頁碼已轉換為 [page X]")
+    print("[OK] 頁碼已轉換為 [page X]")
 def extract_tables():
     """
     母函式：
@@ -170,7 +170,7 @@ def extract_tables():
             with open(output_path, "w", encoding="utf-8") as f:
                 f.writelines(new_lines)
 
-    print("✅ 表格抽取完成")
+    print("[OK] 表格抽取完成")
 def extract_heading_lines():
     import re
     from pathlib import Path
@@ -354,7 +354,7 @@ def extract_heading_lines():
         save_blocks(blocks, OUT_DIR / md_file.name)
         overwrite(md_file, new_lines, structure_lines)
 
-    print("✅ 完整 heading parser 重寫完成")
+    print("[OK] 完整 heading parser 重寫完成")
 def clean_md_garbage_folder(input_dir, output_dir, header_threshold=3):
 
     input_dir = Path(input_dir)
@@ -446,7 +446,7 @@ def clean_md_garbage_folder(input_dir, output_dir, header_threshold=3):
             for item in items:
                 log_rows.append([file.name, log_type, item])
 
-        print(f"✅ cleaned: {file.name}")
+        print(f"[OK] cleaned: {file.name}")
 
     # ---- 6️⃣ 輸出 CSV ----
     with open(log_csv_path, "w", newline="", encoding="utf-8-sig") as f:
@@ -454,7 +454,7 @@ def clean_md_garbage_folder(input_dir, output_dir, header_threshold=3):
         writer.writerow(["file", "type", "content"])
         writer.writerows(log_rows)
 
-    print("✅ 完成（CSV log 已輸出）")
+    print("[OK] 完成（CSV log 已輸出）")
 def build_tree_pipeline():
 
     input_dir = RESULT_DIR / "structure"
@@ -612,27 +612,25 @@ def build_tree_pipeline():
         return dump_tree(root), stats
 
 
-    def main() -> None:
-        OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-        summary_lines = [
-            "# tree_codex build summary",
+    summary_lines = [
+            "# tree build summary",
             "",
-            f"input_dir={INPUT_DIR}",
-            f"output_dir={OUTPUT_DIR}",
+            f"input_dir={input_dir}",
+            f"output_dir={output_dir}",
             "",
-        ]
+    ]
 
-        for file_path in sorted(INPUT_DIR.glob("*.md")):
-            tree_lines, stats = build_tree_for_file(file_path)
-            out_path = OUTPUT_DIR / file_path.name
-            out_path.write_text("\n".join(tree_lines), encoding="utf-8")
+    for file_path in sorted(input_dir.glob("*.md")):
+        tree_lines, stats = build_tree_for_file(file_path)
+        out_path = output_dir / file_path.name
+        out_path.write_text("\n".join(tree_lines), encoding="utf-8")
 
-            summary_lines.append(f"## {file_path.name}")
-            summary_lines.append(f"- emitted_nodes={stats['emitted_nodes']}")
-            summary_lines.append("")
+        summary_lines.append(f"## {file_path.name}")
+        summary_lines.append(f"- emitted_nodes={stats['emitted_nodes']}")
+        summary_lines.append("")
 
-        (OUTPUT_DIR / "_build_summary.md").write_text("\n".join(summary_lines), encoding="utf-8")
+    (output_dir / "_build_summary.md").write_text("\n".join(summary_lines), encoding="utf-8")
+    print(f"[OK] tree 建置完成：{output_dir}")
 
         
     
