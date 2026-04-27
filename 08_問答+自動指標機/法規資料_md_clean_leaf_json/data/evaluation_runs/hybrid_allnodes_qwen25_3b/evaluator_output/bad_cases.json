@@ -1,0 +1,74 @@
+﻿[
+  {
+    "id": "委託人在網頁簽署開戶契約前，系統對於其閱讀完整內容的時間有何防護設計？",
+    "question": "委託人在網頁簽署開戶契約前，系統對於其閱讀完整內容的時間有何防護設計？",
+    "metrics": {
+      "response_relevancy": 0.7647480368614197,
+      "faithfulness": 0.5759618282318115,
+      "context_precision": 0.325,
+      "context_recall": 0.9136648178100586,
+      "consistency": null,
+      "overall_score": 0.6448436707258225
+    },
+    "reasons": [
+      "context_precision<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "金融機構資訊系統安全基準.md |  | p.None-None | table_chunk | table_id=金融機構資訊系統安全基準_table_28,row=5,col=4,chunk=1 || 金融機構資訊系統安全基準.md |  | p.None-None | table_chunk | table_id=金融機構資訊系統安全基準_table_11,row=5,col=4,chunk=1 || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 12.120.8.4 | p.137-160 | table_chunk | table_id=金融機構辦理電子銀行業務安全控管作業基準含附錄1150107_table_119,row=7,col=5,chunk=1",
+    "generated_answer_preview": "根據提供的參考資料，對於委託人在網頁簽署開戶契約前的防護設計並未有明確提及。因此，無法從這些資料中獲得委託人閱讀完整內容所需時間的相關資訊。"
+  },
+  {
+    "id": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "question": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "metrics": {
+      "response_relevancy": 0.7834614515304565,
+      "faithfulness": 0.724713671207428,
+      "context_precision": 0.4777777777777777,
+      "context_recall": 0.7124355435371399,
+      "consistency": null,
+      "overall_score": 0.6745971110132005
+    },
+    "reasons": [
+      "context_precision<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_2,row=1,col=2,chunk=1 || 6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_1,row=1,col=2,chunk=1 || 6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_1,row=1,col=3,chunk=1",
+    "generated_answer_preview": "根據提供的參考資料，若取用或增加不動產及設備對公司營運有重大影響，其決策程序的要求如下：\n\n1. 依據增置財產計劃編製預算。\n2. 按照預算執行。\n3. 在取得或增添不動產及設備時，應依相關作業程序辦理 (請參閱CP-20000採購及付款循環)。\n\n此外，還需遵守以下規定：\n4. 取得或增加的不動產及設備需要進行評估。\n5. 結合上述規定，進行必要的審核和批准流程。"
+  },
+  {
+    "id": "本注意事項所定義的「重大性」委託作業，包含哪三種具體情形？",
+    "question": "本注意事項所定義的「重大性」委託作業，包含哪三種具體情形？",
+    "metrics": {
+      "response_relevancy": 0.8180308938026428,
+      "faithfulness": 0.5403880774974823,
+      "context_precision": 1.0,
+      "context_recall": 0.6114960511525472,
+      "consistency": null,
+      "overall_score": 0.7424787556131681
+    },
+    "reasons": [
+      "faithfulness<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "2.FCM內控CA---壹、業務及收入循環 ---114.04.md |  | p.None-None | table_chunk | table_id=2.FCM內控CA---壹、業務及收入循環 ---114.04_table_3,row=1,col=3,chunk=4 || 2.FCM內控CA---壹、業務及收入循環 ---114.04.md |  | p.None-None | table_chunk | table_id=2.FCM內控CA---壹、業務及收入循環 ---114.04_table_26,row=1,col=3,chunk=3 || 金融機構資訊系統安全基準.md |  | p.None-None | table_chunk | table_id=金融機構資訊系統安全基準_table_29,row=21,col=4,chunk=1",
+    "generated_answer_preview": "根據提供的參考資料，本注意事項所定義的「重大性」委託作業並未明確列出具體包含哪三種具體情形。因此，無法從提供的資料中得出答案。"
+  },
+  {
+    "id": "金融機構在執行「營運衝擊分析（BIA）」後，應產出哪些關鍵的分析結果？",
+    "question": "金融機構在執行「營運衝擊分析（BIA）」後，應產出哪些關鍵的分析結果？",
+    "metrics": {
+      "response_relevancy": 0.8242570161819458,
+      "faithfulness": 0.839121401309967,
+      "context_precision": 1.0,
+      "context_recall": 0.5438470393419266,
+      "consistency": null,
+      "overall_score": 0.8018063642084599
+    },
+    "reasons": [
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "金融機構資訊作業韌性規範_20240521.md | 第二條 > 五、 | p.1-1 | all_node | node=五、 || 中華民國證券商業同業公會資訊作業韌性自律規範.md | 第二條 > 四、 | p.1-1 | all_node | node=四、 || 中華民國期貨業商業同業公會「資訊作業韌性自律規範」完整條文.md | 第二條 > 四、 | p.1-1 | all_node | node=四、",
+    "generated_answer_preview": "金融機構在執行「營運衝击分析(BIA)」後，應產出的關鍵分析結果包括：\n\n1. 權重排序的業務流程（Priority Ordering of Business Processes）\n2. 主要及次要業務影響事項（Critical and Secondary Business Impact Items）\n3. 重要業務目標的達成情況（Status of Achievement of Critical Business Objectives）\n\n這些分析結果用於評估金融機構在核心業務中斷時可能遭受的衝擊，並幫助制定應對策略以減少潛在損失。"
+  }
+]
