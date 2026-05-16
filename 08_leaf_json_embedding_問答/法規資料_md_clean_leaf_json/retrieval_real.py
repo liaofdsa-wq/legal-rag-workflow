@@ -1,5 +1,5 @@
 """
-Module 2: Retrieval 混合檢索（正式版）
+Module 2: Retrieval 混合檢索
 ─────────────────────────────────────────
 向量檢索：SentenceTransformer + .npy（與 app.py 同架構，不需額外向量資料庫）
 關鍵字檢索：rank_bm25（BM25Okapi）

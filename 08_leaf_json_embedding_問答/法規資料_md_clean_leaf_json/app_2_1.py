@@ -1,3 +1,11 @@
+"""
+app_2_1.py： app.py 加入混和搜索、提示詞工程
+1. UI 介面加入混合搜索權重調整(slider) → 可以刪除(簡單寫死0.5之類的)
+2. Hybrid, Leaf...等模式選擇邏輯沿用 app.py
+3. 有更改 bulid prompt()的指令：加上限制繁體中文輸出，這部份看你最後要不要統一一下指令，可以隨便改
+詳細可見各小結的註解
+如果需要加入動態搜索，可以從 generate_answer 的 candidates 下手
+"""
 from __future__ import annotations
 
 import json
