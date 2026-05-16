@@ -1,0 +1,56 @@
+﻿[
+  {
+    "id": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "question": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "metrics": {
+      "response_relevancy": 0.7983822822570801,
+      "faithfulness": 0.7218129485845566,
+      "context_precision": 0.4777777777777777,
+      "context_recall": 0.7124355435371399,
+      "consistency": null,
+      "overall_score": 0.6776021380391386
+    },
+    "reasons": [
+      "context_precision<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_2,row=1,col=2,chunk=1 || 6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_1,row=1,col=2,chunk=1 || 6.FCM內控CF---伍、不動產及設備循環---114.04.md |  | p.None-None | table_chunk | table_id=6.FCM內控CF---伍、不動產及設備循環---114.04_table_1,row=1,col=3,chunk=1",
+    "generated_answer_preview": "根據提供的參考資料，如果不動產及設備的取得或增添對公司營運有重大影響，其決策程序特別要求如下：\n\n1. 应依據增置財產計劃編製預算。\n2. 按照預算執行此項作業。\n3. 在採購和付款時，需遵循相關作業程序（請參閱CP-20000採購及付款循環）。\n\n因此，對公司營運有重大影響的不動產及設備取得或增添，需要特別注意以上三個步驟。"
+  },
+  {
+    "id": "委託人在網頁簽署開戶契約前，系統對於其閱讀完整內容的時間有何防護設計？",
+    "question": "委託人在網頁簽署開戶契約前，系統對於其閱讀完整內容的時間有何防護設計？",
+    "metrics": {
+      "response_relevancy": 0.8279713988304138,
+      "faithfulness": 0.6646484732627869,
+      "context_precision": 0.325,
+      "context_recall": 0.9136648178100586,
+      "consistency": null,
+      "overall_score": 0.6828211724758149
+    },
+    "reasons": [
+      "context_precision<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "金融機構資訊系統安全基準.md |  | p.None-None | table_chunk | table_id=金融機構資訊系統安全基準_table_28,row=5,col=4,chunk=1 || 金融機構資訊系統安全基準.md |  | p.None-None | table_chunk | table_id=金融機構資訊系統安全基準_table_11,row=5,col=4,chunk=1 || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 12.120.8.4 | p.137-160 | table_chunk | table_id=金融機構辦理電子銀行業務安全控管作業基準含附錄1150107_table_119,row=7,col=5,chunk=1",
+    "generated_answer_preview": "根據參考資料，委託人在網頁簽署開戶契約前的系統防護設計主要涉及閱讀完整內容的時間控制。這項措施應在保護客戶資訊方面採取，但具體到電子銀行業務的安全管控基準中未有詳細說明。\n\n對於簽署開戶契約前的頁面顯示時間限制，參考資料3提及的是採用法人戶及其負責人貸款契約成立的安全設計機制。這意味著可能存在類似的防護措施來確保客戶閱讀完整內容。然而，這些信息並不適用於開戶契約簽署的情況。\n\n因此，無法直接從提供的資料中得出委託人在網頁簽署開戶契約前系統對於其閱讀完整內容所需時間的具體設計。"
+  },
+  {
+    "id": "根據第二條，將保單內容拆分為兩部分時，「電子化保險契約條款」可以採哪兩種形式提供給保戶？",
+    "question": "根據第二條，將保單內容拆分為兩部分時，「電子化保險契約條款」可以採哪兩種形式提供給保戶？",
+    "metrics": {
+      "response_relevancy": 0.8028919100761414,
+      "faithfulness": 0.7713042497634888,
+      "context_precision": 1.0,
+      "context_recall": 0.5479214787483215,
+      "consistency": null,
+      "overall_score": 0.7805294096469879
+    },
+    "reasons": [
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "保險業辦理電子保單簽發及辦理電子化保險契約條款保單作業自律規範 .md | 第 一 章 > 第 2 條 > 二、 | p.2-2 | leaf | context=第 一 章 > 第 2 條 > 二、 || 保險業經營電子商務自律規範全條文(114.11.10金管保綜字第1140433678號).md | 8.5 | p.6-7 | table_chunk | table_id=保險業經營電子商務自律規範全條文(114.11.10金管保綜字第1140433678號)_table_5,row=7,col=2,chunk=1 || 保險業辦理電子保單簽發及辦理電子化保險契約條款保單作業自律規範 .md | 第 一 章 > 第 2 條 > 一、 | p.2-2 | leaf | context=第 一 章 > 第 2 條 > 一、",
+    "generated_answer_preview": "根據第二條的規定，「電子化保險契約條款」可以採用 QR Code 和網址兩種形式提供給保戶。"
+  }
+]

@@ -1,0 +1,149 @@
+﻿[
+  {
+    "id": "根據規範，期貨商提存「特別盈餘公積」的比例為何？其用途有何限制？",
+    "question": "根據規範，期貨商提存「特別盈餘公積」的比例為何？其用途有何限制？",
+    "metrics": {
+      "response_relevancy": 0.7386879920959473,
+      "faithfulness": 0.4637148976325989,
+      "context_precision": 0.0,
+      "context_recall": 0.4920748472213745,
+      "consistency": null,
+      "overall_score": 0.42361943423748016
+    },
+    "reasons": [
+      "faithfulness<0.55",
+      "context_precision<0.55",
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "「期貨業資通系統與服務供應鏈風險管理自律規範」完整條文.md | 第五條 > 四、 | p.5-5 | leaf | context=第五條 > 四、 || 「期貨業資通系統與服務供應鏈風險管理自律規範」完整條文.md | 第一條 | p.1-1 | leaf | context=第一條 || 1.FCM內控-總則---114.04.md | 二、 > (二) | p.1-1 | leaf | context=二、 > (二)",
+    "generated_answer_preview": "根據提供的參考資料，並無直接提到期貨商提存特別盈餘公積的比例及其用途的限制。因此，無法從這些資料中得出答案。"
+  },
+  {
+    "id": "在採購付款作業中，採購、驗收、會計與出納單位的職能應如何配置以維持獨立性？",
+    "question": "在採購付款作業中，採購、驗收、會計與出納單位的職能應如何配置以維持獨立性？",
+    "metrics": {
+      "response_relevancy": 0.7732310891151428,
+      "faithfulness": 0.626757450401783,
+      "context_precision": 0.2,
+      "context_recall": 0.5295342206954956,
+      "consistency": null,
+      "overall_score": 0.5323806900531054
+    },
+    "reasons": [
+      "context_precision<0.55",
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "附件1_金融機構資通系統與服務供應鏈風險管理規範_v2025.9.30.md | 第七條 > 一、 | p.4-4 | leaf | context=第七條 > 一、 || 1.FCM內控-總則---114.04.md | 十五、 | p.11-12 | leaf | context=十五、 || 1.FCM內控-總則---114.04.md | 二十、 > (一) | p.15-16 | leaf | context=二十、 > (一)",
+    "generated_answer_preview": "根據提供的參考資料，維持採購、驗收、會計與出納單位之間獨立性的建議如下：\n\n1. **採購單位**：應由專門負責督導及辦理資訊安全要求事項的專人負責。此專人可考慮由銀行指定。\n\n2. **驗收單位**：雖然資料未明確說明其配置，但通常而言，驗收單位也需要獨立性來確保貨物與訂單相符，因此最好也應設立專門負責人。\n\n3. **會計單位**：由於會計工作涉及財務報表和公司收入、支出的記錄管理，建議由獨立於採購和出納部門的專人負責。這可以確保會計信息的準確性和真實性。\n\n4. **出納單位**：通常由獨立的出納人員負責審核與付款業務以防止誤用公司資金的情況發生。"
+  },
+  {
+    "id": "專業投資人中之「自然人」，認購每一虛擬通貨募資案的金額上限是多少？",
+    "question": "專業投資人中之「自然人」，認購每一虛擬通貨募資案的金額上限是多少？",
+    "metrics": {
+      "response_relevancy": 0.7901967167854309,
+      "faithfulness": 0.5120876332124075,
+      "context_precision": 0.6791666666666667,
+      "context_recall": 0.5777299404144287,
+      "consistency": null,
+      "overall_score": 0.6397952392697335
+    },
+    "reasons": [
+      "faithfulness<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "期貨商受理通信或電子化方式開戶應行注意事項.md | 8. | p.2-3 | leaf | context=8. || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 第八條 > 二、 > (六) > １、 | p.13-13 | leaf | context=第八條 > 二、 > (六) > １、 || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 第八條 > 二、 > (六) > ３、 | p.13-13 | leaf | context=第八條 > 二、 > (六) > ３、",
+    "generated_answer_preview": "根據提供的參考資料，無法直接得出專業投資人中之「自然人」認購每一虛擬通貨募資案的金額上限。以上兩則資料均談論的是傳統金融交易中的保證金使用限制和身分確認方式，而非針對虛擬通貨募資案的特定規定。因此，對於這類問題，資料不足以提供完整答案。"
+  },
+  {
+    "id": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "question": "取得或增添不動產及設備時，若對公司營運有重大影響，其決策程序有何特別要求？",
+    "metrics": {
+      "response_relevancy": 0.7162559032440186,
+      "faithfulness": 0.5220302045345306,
+      "context_precision": 1.0,
+      "context_recall": 0.6136636137962341,
+      "consistency": null,
+      "overall_score": 0.7129874303936958
+    },
+    "reasons": [
+      "faithfulness<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "~內部控制制度總則(114.04.11修)--FOREWORD.md | 十一、 > (五) | p.18-18 | leaf | context=十一、 > (五) || 金融機構資通安全防護基準.md | 第十五條 > 一、 > (二) | p.8-8 | leaf | context=第十五條 > 一、 > (二) || 金融機構資通安全防護基準.md | 第十五條 > 一、 > (八) | p.8-8 | leaf | context=第十五條 > 一、 > (八)",
+    "generated_answer_preview": "根據參考資料提供的信息，對於公司申請增設不動產及設備的決策程序並無特別要求。資料主要討論的是金融機構在資通安全防護基準方面的準備和調整工作，而非對新增不動產及設備本身的決策過程或相關要求。因此，無法從上述資料中得出對此問題的完整回答。"
+  },
+  {
+    "id": "零用金管理作業中，對於零用金的設立目的與經管人員的職責有何規範？",
+    "question": "零用金管理作業中，對於零用金的設立目的與經管人員的職責有何規範？",
+    "metrics": {
+      "response_relevancy": 0.8074218034744263,
+      "faithfulness": 0.5041743963956833,
+      "context_precision": 1.0,
+      "context_recall": 0.596131294965744,
+      "consistency": null,
+      "overall_score": 0.7269318737089634
+    },
+    "reasons": [
+      "faithfulness<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "3.FCM內控CP ---貳、採購及付款循環 ---114.04.md | 二、 | p.6-7 | leaf | context=二、 || 附件1_金融機構資通系統與服務供應鏈風險管理規範_v2025.9.30.md | 第三條 > 一、 | p.1-1 | leaf | context=第三條 > 一、 || 「網路安全防護自律規範」完整條文.md | 第四條 > 一、 > (四) | p.3-3 | leaf | context=第四條 > 一、 > (四)",
+    "generated_answer_preview": "根據提供的參考資料，未能找到關於零用金管理作業中零用金設立目的與經管人員職責的規範。因此，無法完整回答該問題。"
+  },
+  {
+    "id": "本注意事項所定義的「重大性」委託作業，包含哪三種具體情形？",
+    "question": "本注意事項所定義的「重大性」委託作業，包含哪三種具體情形？",
+    "metrics": {
+      "response_relevancy": 0.7502303123474121,
+      "faithfulness": 0.4897390305995941,
+      "context_precision": 1.0,
+      "context_recall": 0.6855056683222452,
+      "consistency": null,
+      "overall_score": 0.7313687528173128
+    },
+    "reasons": [
+      "faithfulness<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "附件1_金融機構資通系統與服務供應鏈風險管理規範_v2025.9.30.md | 第六條 > 三、 | p.3-3 | leaf | context=第六條 > 三、 || 金融機構資訊系統安全基準.md | 參、 > (陸) > 三、 > (八) > 3、 > (1) | p.478-478 | leaf | context=參、 > (陸) > 三、 > (八) > 3、 > (1) || 保險業辦理資訊安全防護自律規範-6.md | 一、 | p.1-1 | leaf | context=一、",
+    "generated_answer_preview": "根據提供的參考資料，並未明確列出三種具體情形的「重大性」委託作業。因此，無法從這些資料中直接回答問題。"
+  },
+  {
+    "id": "根據第二條，將保單內容拆分為兩部分時，「電子化保險契約條款」可以採哪兩種形式提供給保戶？",
+    "question": "根據第二條，將保單內容拆分為兩部分時，「電子化保險契約條款」可以採哪兩種形式提供給保戶？",
+    "metrics": {
+      "response_relevancy": 0.8090646266937256,
+      "faithfulness": 0.6768655776977539,
+      "context_precision": 1.0,
+      "context_recall": 0.5479214787483215,
+      "consistency": null,
+      "overall_score": 0.7584629207849503
+    },
+    "reasons": [
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "保險業辦理電子保單簽發及辦理電子化保險契約條款保單作業自律規範 .md | 第 一 章 > 第 2 條 > 二、 | p.2-2 | leaf | context=第 一 章 > 第 2 條 > 二、 || 保險業辦理電子保單簽發及辦理電子化保險契約條款保單作業自律規範 .md | 第 一 章 > 第 2 條 > 一、 | p.2-2 | leaf | context=第 一 章 > 第 2 條 > 一、 || 保險業辦理電子保單簽發及辦理電子化保險契約條款保單作業自律規範 .md | 第 五 章 > 第 17 條 | p.7-7 | leaf | context=第 五 章 > 第 17 條",
+    "generated_answer_preview": "根據第二條，電子化保險契約條款可以採用兩種形式提供給保戶：\n\n1. 印製於紙本文件中的 QR Code 形式；\n2. 載於電子文件中的網址形式。"
+  },
+  {
+    "id": "發行人於交易平台辦理發行之虛擬通貨（STO），其種類僅限於哪兩種類型？",
+    "question": "發行人於交易平台辦理發行之虛擬通貨（STO），其種類僅限於哪兩種類型？",
+    "metrics": {
+      "response_relevancy": 0.859836995601654,
+      "faithfulness": 0.6394087076187134,
+      "context_precision": 1.0,
+      "context_recall": 0.5359311103820801,
+      "consistency": null,
+      "overall_score": 0.7587942034006119
+    },
+    "reasons": [
+      "context_recall<0.55"
+    ],
+    "missing_inputs": [],
+    "retrieved_paths": "金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 第七條 > 一、 > (二) > ２、 > (２) | p.9-9 | leaf | context=第七條 > 一、 > (二) > ２、 > (２) || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 第七條 > 一、 > (二) > ２、 > (６) | p.9-9 | leaf | context=第七條 > 一、 > (二) > ２、 > (６) || 金融機構辦理電子銀行業務安全控管作業基準含附錄1150107.md | 第七條 > 一、 > (一) > ２、 > (２) | p.7-7 | leaf | context=第七條 > 一、 > (一) > ２、 > (２)",
+    "generated_answer_preview": "根據提供的參考資料，發行人於交易平台辦理發行的虛擬通貨（STO）種類僅限於ATM之存提款服務和任一金融機構同一統一編號帳戶間轉帳、定存或投資這兩種類型。"
+  }
+]

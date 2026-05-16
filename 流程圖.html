@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>法規資料整理流程圖</title>
+  <style>
+    :root {
+      --ink: #1f2937;
+      --muted: #667085;
+      --line: #475467;
+      --bg: #f8fafc;
+      --paper: #ffffff;
+      --pdf: #fff1e8;
+      --pdf-border: #d9480f;
+      --code: #eef6ff;
+      --code-border: #1c7ed6;
+      --gen: #eefaf1;
+      --gen-border: #2f9e44;
+      --edit: #fff8db;
+      --edit-border: #b7791f;
+      --data: #f4f0ff;
+      --data-border: #6741d9;
+      --app: #e8fbfb;
+      --app-border: #0b7285;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", "PingFang TC", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 38px 22px 52px;
+    }
+
+    header {
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .legend li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      color: var(--muted);
+      background: var(--paper);
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--line);
+      border-radius: 4px;
+    }
+
+    .pdf-swatch { background: var(--pdf); border-color: var(--pdf-border); }
+    .code-swatch { background: var(--code); border-color: var(--code-border); }
+    .gen-swatch { background: var(--gen); border-color: var(--gen-border); }
+    .edit-swatch { background: var(--edit); border-color: var(--edit-border); }
+    .data-swatch { background: var(--data); border-color: var(--data-border); }
+    .app-swatch { background: var(--app); border-color: var(--app-border); }
+
+    .diagram-shell {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--paper);
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    svg {
+      display: block;
+      min-width: 1020px;
+      width: 100%;
+      height: auto;
+    }
+
+    .node rect {
+      rx: 6;
+      ry: 6;
+      stroke-width: 1.8;
+    }
+
+    .node text {
+      fill: var(--ink);
+      font-size: 15px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .node .sub {
+      fill: var(--muted);
+      font-size: 12px;
+    }
+
+    .pdf rect { fill: var(--pdf); stroke: var(--pdf-border); }
+    .code rect { fill: var(--code); stroke: var(--code-border); }
+    .gen rect { fill: var(--gen); stroke: var(--gen-border); }
+    .edit rect { fill: var(--edit); stroke: var(--edit-border); }
+    .data rect { fill: var(--data); stroke: var(--data-border); }
+    .app rect { fill: var(--app); stroke: var(--app-border); }
+
+    .final rect {
+      fill: #dffafa;
+      stroke: #087f8c;
+      stroke-width: 3;
+      filter: drop-shadow(0 10px 18px rgba(8, 127, 140, 0.18));
+    }
+
+    .final text {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .final .sub {
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    .edge {
+      fill: none;
+      stroke: var(--line);
+      stroke-width: 1.8;
+      marker-end: url(#arrow);
+    }
+
+    .edge-label {
+      fill: var(--muted);
+      font-size: 12px;
+      text-anchor: middle;
+    }
+
+    .section-title {
+      fill: #344054;
+      font-size: 13px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+
+    .notes {
+      margin-top: 22px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .note {
+      padding: 16px;
+      background: var(--paper);
+      border: 1px solid #d0d5dd;
+      border-radius: 8px;
+    }
+
+    .note h2 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    code {
+      padding: 1px 5px;
+      border-radius: 5px;
+      background: #eef2f7;
+      color: #27364a;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        padding: 28px 14px 40px;
+      }
+
+      h1 {
+        font-size: 25px;
+      }
+
+      .diagram-shell {
+        padding: 12px;
+      }
+
+      .notes {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>法規資料整理與 RAG 問答流程</h1>
+      <p class="lead">
+        主流程由上往下；左側 OCR 來源匯入 Markdown 精修區，右側 800200 baseline 從 Markdown 精修區分支。生成區與精修區分開，後續程式固定讀精修區。
+      </p>
+      <ul class="legend" aria-label="顏色圖例">
+        <li><span class="swatch pdf-swatch"></span>原始 / OCR 資料</li>
+        <li><span class="swatch code-swatch"></span>執行程式</li>
+        <li><span class="swatch gen-swatch"></span>生成區</li>
+        <li><span class="swatch edit-swatch"></span>精修區</li>
+        <li><span class="swatch data-swatch"></span>JSON / Embedding</li>
+        <li><span class="swatch app-swatch"></span>問答展示</li>
+      </ul>
+    </header>
+
+    <section class="diagram-shell" aria-label="法規資料整理流程圖">
+      <svg viewBox="0 0 1020 1260" role="img" aria-labelledby="diagram-title diagram-desc">
+        <title id="diagram-title">法規資料整理流程圖</title>
+        <desc id="diagram-desc">從原始 PDF 到 Markdown、精修、結構化、JSON、embedding 和 RAG 問答的流程圖，含 OCR 與 800200 baseline 分支。</desc>
+
+        <defs>
+          <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#475467"></path>
+          </marker>
+        </defs>
+
+        <text class="section-title" x="510" y="24">主流程</text>
+        <text class="section-title" x="170" y="300">未來 OCR 入口</text>
+        <text class="section-title" x="850" y="300">baseline 分支</text>
+
+        <g class="node pdf">
+          <rect x="360" y="42" width="300" height="66"></rect>
+          <text x="510" y="66">01 原始 PDF</text>
+          <text class="sub" x="510" y="88">法規資料</text>
+        </g>
+
+        <path class="edge" d="M510 108 L510 142"></path>
+
+        <g class="node code">
+          <rect x="360" y="142" width="300" height="66"></rect>
+          <text x="510" y="166">02 PDF 轉 Markdown 程式</text>
+          <text class="sub" x="510" y="188">提md.py</text>
+        </g>
+
+        <path class="edge" d="M510 208 L510 242"></path>
+
+        <g class="node gen">
+          <rect x="360" y="242" width="300" height="66"></rect>
+          <text x="510" y="266">03 Markdown 生成區</text>
+          <text class="sub" x="510" y="288">程式粗轉 Markdown</text>
+        </g>
+
+        <path class="edge" d="M510 308 L510 352"></path>
+
+        <g class="node pdf">
+          <rect x="35" y="352" width="270" height="76"></rect>
+          <text x="170" y="378">未來 OCR 流程</text>
+          <text class="sub" x="170" y="401">掃描 PDF / 圖片 PDF</text>
+        </g>
+
+        <g class="node edit">
+          <rect x="360" y="352" width="300" height="76"></rect>
+          <text x="510" y="378">04 Markdown 精修區</text>
+          <text class="sub" x="510" y="401">統一收斂所有可用 Markdown</text>
+        </g>
+
+        <path class="edge" d="M305 390 L352 390"></path>
+        <text class="edge-label" x="330" y="378">OCR Markdown</text>
+
+        <path class="edge" d="M510 428 L510 472"></path>
+
+        <g class="node code">
+          <rect x="715" y="352" width="270" height="76"></rect>
+          <text x="850" y="378">03_embed_fixed_800_200_baseline.py</text>
+          <text class="sub" x="850" y="401">800 字 / overlap 200 字</text>
+        </g>
+
+        <path class="edge" d="M660 390 L707 390"></path>
+        <text class="edge-label" x="685" y="378">固定切段</text>
+
+        <path class="edge" d="M850 428 L850 478"></path>
+
+        <g class="node gen">
+          <rect x="715" y="478" width="270" height="66"></rect>
+          <text x="850" y="502">800200 Embedding</text>
+          <text class="sub" x="850" y="524">固定長度檢索 baseline</text>
+        </g>
+
+        <g class="node code">
+          <rect x="360" y="472" width="300" height="66"></rect>
+          <text x="510" y="496">05 結構化程式</text>
+          <text class="sub" x="510" y="518">分類前處理_codex.py</text>
+        </g>
+
+        <path class="edge" d="M510 538 L510 582"></path>
+
+        <g class="node gen">
+          <rect x="360" y="582" width="300" height="78"></rect>
+          <text x="510" y="607">06 Clean / Tree 生成區</text>
+          <text class="sub" x="510" y="631">clean md / tables / headings / tree</text>
+        </g>
+
+        <path class="edge" d="M510 660 L510 704"></path>
+
+        <g class="node edit">
+          <rect x="360" y="704" width="300" height="76"></rect>
+          <text x="510" y="730">07 Clean / Tree 精修區</text>
+          <text class="sub" x="510" y="753">人工確認 clean md / tables / tree</text>
+        </g>
+
+        <path class="edge" d="M510 780 L510 824"></path>
+
+        <g class="node code">
+          <rect x="360" y="824" width="300" height="76"></rect>
+          <text x="510" y="850">08-1 結構化 JSON 建置</text>
+          <text class="sub" x="510" y="873">01_build_structured_json.py</text>
+        </g>
+
+        <path class="edge" d="M510 900 L510 944"></path>
+
+        <g class="node gen">
+          <rect x="360" y="944" width="300" height="76"></rect>
+          <text x="510" y="970">data/json + data/summary</text>
+          <text class="sub" x="510" y="993">all_nodes / leaf_nodes / table_chunks</text>
+        </g>
+
+        <path class="edge" d="M510 1020 L510 1064"></path>
+
+        <g class="node code">
+          <rect x="360" y="1064" width="300" height="76"></rect>
+          <text x="510" y="1090">08-2 結構化 Embedding</text>
+          <text class="sub" x="510" y="1113">02_embed_structured_modes.py</text>
+        </g>
+
+        <path class="edge" d="M850 544 L850 1202 L698 1202"></path>
+        <text class="edge-label" x="770" y="1188">App 可切換比較</text>
+
+        <path class="edge" d="M510 1140 L510 1164"></path>
+        <g class="node app final">
+          <rect x="330" y="1164" width="360" height="86"></rect>
+          <text x="510" y="1190">08-3 問答 / 檢索</text>
+          <text class="sub" x="510" y="1218">app.py 或 04_batch_rag_answers.py</text>
+        </g>
+      </svg>
+    </section>
+
+    <section class="notes" aria-label="流程說明">
+      <section class="note">
+        <h2>生成區與精修區分離</h2>
+        <p>
+          `03_Markdown生成區` 和 `06_CleanTree生成區` 是程式輸出；人工確認後，才把採用版本放進 `04_Markdown精修區` 或 `07_CleanTree精修區`。
+        </p>
+      </section>
+      <section class="note">
+        <h2>OCR 也進 Markdown 精修區</h2>
+        <p>
+          未來 OCR 產出的 Markdown 進 `04_Markdown精修區`，讓 PDF 轉檔與 OCR 來源收斂到同一入口。
+        </p>
+      </section>
+      <section class="note">
+        <h2>主線與 baseline</h2>
+        <p>
+          主線從 `07` 產生 structured JSON，再切 `all_nodes`、`leaf`、`table`、`hybrid`。`800200` 從 `04` 直接固定切段，用來比較檢索效果。
+        </p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

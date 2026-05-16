@@ -1,0 +1,55 @@
+﻿{
+  "case_count": 92,
+  "metric_summary": {
+    "response_relevancy": {
+      "mean": 0.8155617370553638,
+      "count": 92,
+      "missing_count": 0,
+      "min": 0.6945558786392212,
+      "max": 0.9029049277305603
+    },
+    "faithfulness": {
+      "mean": 0.7565745515297659,
+      "count": 92,
+      "missing_count": 0,
+      "min": 0.577849268913269,
+      "max": 0.9653282761573792
+    },
+    "context_precision": {
+      "mean": 0.9824275362318842,
+      "count": 92,
+      "missing_count": 0,
+      "min": 0.325,
+      "max": 1.0
+    },
+    "context_recall": {
+      "mean": 0.7401394930978616,
+      "count": 92,
+      "missing_count": 0,
+      "min": 0.5479214787483215,
+      "max": 0.9385272264480591
+    },
+    "consistency": {
+      "mean": null,
+      "count": 0,
+      "missing_count": 92,
+      "min": null,
+      "max": null
+    },
+    "overall_score": {
+      "mean": 0.8236758294787189,
+      "count": 92,
+      "missing_count": 0,
+      "min": 0.6776021380391386,
+      "max": 0.903463214635849
+    }
+  },
+  "missing_input_counts": {
+    "missing_gold_answer": 0,
+    "missing_generated_answer": 0,
+    "missing_retrieved_contexts": 0
+  },
+  "model_name": "BAAI/bge-m3",
+  "bad_case_threshold": 0.55,
+  "input_path": "C:\\Users\\ruby0\\Desktop\\EY_RAG\\legal-rag-workflow-main\\08_leaf_json_embedding_問答\\法規資料_md_clean_leaf_json\\data\\evaluation_runs\\capstone_chatgpt54\\answers_rich_dedup.jsonl"
+}

@@ -1,0 +1,73 @@
+﻿{
+  "version": 1,
+  "runs": [
+    {
+      "run_name": "hybrid_leaf_qwen25_3b",
+      "description": "baseline：包含表格與一般敘述性文字，文字節點採 leaf",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "hybrid",
+      "hybrid_text_mode": "leaf",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    },
+    {
+      "run_name": "hybrid_allnodes_qwen25_3b",
+      "description": "包含表格與一般敘述性文字，文字節點採 all_nodes",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "hybrid",
+      "hybrid_text_mode": "all_nodes",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    },
+    {
+      "run_name": "leaf_qwen25_3b",
+      "description": "只讀一般敘述性文字，節點採 leaf，排除表格",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "leaf",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    },
+    {
+      "run_name": "allnodes_qwen25_3b",
+      "description": "只讀一般敘述性文字，節點採 all_nodes，排除表格",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "all_nodes",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    },
+    {
+      "run_name": "table_qwen25_3b",
+      "description": "只讀表格文字，排除一般敘述性文字",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "table",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    },
+    {
+      "run_name": "800200_qwen25_3b",
+      "description": "按字數切分：800 字一刀，overlap 200",
+      "embedding_model": "BAAI/bge-m3",
+      "mode": "800200",
+      "top_k": 5,
+      "ollama_model": "qwen2.5:3b",
+      "prompt_context_count": 3,
+      "question_file": "data/evaluation_inputs/capstone_questions_normalized.csv",
+      "enabled": true
+    }
+  ]
+}
