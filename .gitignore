@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# large/generated data
+法規資料_md_clean_leaf_json/Chroma_DataBase/
+法規資料_md_clean_leaf_json/chroma/
+*.sqlite3
+*.db
+
+# outputs / evaluation generated files
+法規資料_md_clean_leaf_json/data/evaluation_outputs/
+法規資料_md_clean_leaf_json/data/evaluation_results/
+法規資料_md_clean_leaf_json/data/evaluation_results_archive/
+
+# local env
+.env
+.venv/
+venv/
+
+# system files
+.DS_Store
+Thumbs.db
