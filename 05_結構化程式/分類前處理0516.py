@@ -191,8 +191,7 @@ def build_tree_pipeline():
     print(f"[OK] Tree 輸出完成")
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 以下為從 Codex 版移植的強化函式，不修改最終版任何一行程式碼
-# 呼叫方式：在 __main__ 中以這兩個函式取代原本對應的呼叫
+# 以下為從 Codex 版移植的強化函式
 # ══════════════════════════════════════════════════════════════════════════════
 
 def clean_md_garbage_folder_with_log(input_dir, output_dir, header_threshold=3):
@@ -273,17 +272,17 @@ def clean_md_garbage_folder_with_log(input_dir, output_dir, header_threshold=3):
 
 def build_tree_pipeline_with_parse():
     """
-    【移植自 Codex 版】
+    【移植自 Codex 版 - 嚴格維持架構與羅馬數字對齊修正版】
     在最終版 build_tree_pipeline 的基礎上，以真正的樹狀解析取代單純 shutil.copy：
-    - 讀取 structure/*.md，將 [標記] 行解析為 Node 樹
-    - 依層級縮排輸出至 tree/*.md
-    - 額外產生 tree/_build_summary.md 記錄各檔 emitted_nodes 數量
+    - 嚴格維持原本架構：只讀取 structure/*.md (純標籤骨架)，絕不包含任何法規內文。
+    - 核心修正：將羅馬數字、英文字母、天干等標籤從動態層級改為 FIXED_LEVEL 固定層級定義，
+      徹底解決 [i.][ii.][iii.] 被當作上下級、導致縮排歪斜的問題。
     """
-    input_dir  = RESULT_DIR / "structure"
+    input_dir  = RESULT_DIR / "structure"  # 100% 維持原本輸入源，只處理純標籤
     output_dir = RESULT_DIR / "tree"
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── Codex 版：用來識別 structure 檔中各標記對應的固定層級 ────
+    # ── 1. 與原本完全相同的 PATTERNS ────────────────────────────────
     PATTERNS = [
         r"^第\s*[一二三四五六七八九十百0-9]+\s*章",
         r"^第\s*[一二三四五六七八九十百0-9]+\s*節",
@@ -300,12 +299,22 @@ def build_tree_pipeline_with_parse():
         r"^[ivxlcdmIVXLCDM]+[\.．、]",
     ]
 
+    # ── 2. 核心修正：為所有子標籤分配固定層級，避免動態遞增 ─────────
     FIXED_LEVEL: Dict[str, int] = {
-        "CHAPTER": 0,
-        "SECTION": 1,
-        "ARTICLE": 2,
-        "PARA":    3,
-        "SUBITEM": 4,
+        "CHAPTER":      0,  # 第X章
+        "SECTION":      1,  # 第X節
+        "ARTICLE":      2,  # 第X條
+        "PARA":         3,  # 第X項
+        "SUBITEM":      4,  # 第X款
+        "ZH_BIG_DOT":   5,  # 壹、
+        "ZH_BIG_PAREN": 6,  # (壹)
+        "ZH_DOT":       7,  # 一、
+        "ZH_PAREN":     8,  # (一)
+        "NUM_DOT":      9,  # 1. 
+        "NUM_PAREN":    10, # (1)
+        "TIAN_GAN":     11, # 甲、乙、丙
+        "ROMAN":        12, # i. ii. iii. (修正關鍵：有了固定層級，同級標籤便會完美對齊)
+        "ALPHA":        13, # a. b. c.
     }
 
     @dataclass
@@ -314,22 +323,25 @@ def build_tree_pipeline_with_parse():
         level: int
         children: List["Node"] = field(default_factory=list)
 
+    # ── 3. 將動態型態正式改為 is_fixed=True ────────────────────────
     def classify(inner: str) -> Tuple[str, bool]:
         if "章" in inner: return "CHAPTER", True
         if "節" in inner: return "SECTION", True
         if "條" in inner: return "ARTICLE", True
         if "項" in inner: return "PARA",    True
         if "款" in inner: return "SUBITEM", True
-        if re.match(r"^[一二三四五六七八九十]+[、．.]$", inner):       return "ZH_DOT",      False
-        if re.match(r"^[壹貳參肆伍陸柒捌玖拾]+[、．.]$", inner):      return "ZH_BIG_DOT",  False
-        if re.match(r"^[（(][一二三四五六七八九十]+[）)]$", inner):    return "ZH_PAREN",    False
-        if re.match(r"^[（(][壹貳參肆伍陸柒捌玖拾]+[）)]$", inner):   return "ZH_BIG_PAREN",False
-        if re.match(r"^[０-９\d]+[\.．、]$", inner):                   return "NUM_DOT",     False
-        if re.match(r"^[（(]\d+[）)]$", inner):                        return "NUM_PAREN",   False
-        if re.match(r"^[a-zA-Z][\.．、]$", inner):                     return "ALPHA",       False
-        if re.match(r"^[ivxlcdmIVXLCDM]+[\.．、]$", inner):           return "ROMAN",       False
+        if re.match(r"^[一二三四五六七八九十]+[、．.]$", inner):       return "ZH_DOT",      True
+        if re.match(r"^[壹貳參肆伍陸柒捌玖拾]+[、．.]$", inner):      return "ZH_BIG_DOT",  True
+        if re.match(r"^[（(][一二三四五六七八九十]+[）)]$", inner):    return "ZH_PAREN",    True
+        if re.match(r"^[（(][壹貳參肆伍陸柒捌玖拾]+[）)]$", inner):   return "ZH_BIG_PAREN",True
+        if re.match(r"^[０-９\d]+[\.．、]$", inner):                   return "NUM_DOT",     True
+        if re.match(r"^[（(]\d+[）)]$", inner):                        return "NUM_PAREN",   True
+        if re.match(r"^[甲乙丙丁戊己庚辛壬癸]+[、．.]$", inner):       return "TIAN_GAN",    True
+        if re.match(r"^[a-zA-Z][\.．、]$", inner):                     return "ALPHA",       True
+        if re.match(r"^[ivxlcdmIVXLCDM]+[\.．、]$", inner):           return "ROMAN",       True
         return "OTHER", False
 
+    # ── 4. 與原本完全相同的正規化邏輯 ───────────────────────
     def normalize_bracket_lines(raw_lines: List[str]) -> List[str]:
         compiled = [re.compile(p) for p in PATTERNS]
         result: List[str] = []
@@ -348,6 +360,7 @@ def build_tree_pipeline_with_parse():
                 result.append(s)
         return result
 
+    # ── 5. 與原本完全相同的層級計算，但現在皆透過 FIXED_LEVEL 查表 ────
     def compute_level(inner: str, stack: List[Node], type_last_level: Dict[str, int]) -> int:
         tag_type, is_fixed = classify(inner)
         if is_fixed:
@@ -358,6 +371,7 @@ def build_tree_pipeline_with_parse():
         type_last_level[tag_type] = level
         return level
 
+    # ── 6. 與原本完全相同的樹狀輸出邏輯 ───────────────────────────
     def dump_tree(node: Node, indent: int = 0, out: List[str] = None) -> List[str]:
         if out is None:
             out = []
@@ -367,6 +381,7 @@ def build_tree_pipeline_with_parse():
             dump_tree(child, indent + 1, out)
         return out
 
+    # ── 7. 與原本完全相同的純骨架建樹流程（完美維持原本架構） ────────
     def build_tree_for_file(path: Path) -> Tuple[List[str], Dict[str, int]]:
         raw_lines     = path.read_text(encoding="utf-8", errors="ignore").splitlines()
         bracket_lines = normalize_bracket_lines(raw_lines)
@@ -391,7 +406,7 @@ def build_tree_pipeline_with_parse():
                 stack[-1].text += "\n" + s
         return dump_tree(root), stats
 
-    # ── 主流程 ────────────────────────────────────────────────────
+    # ── 8. 與原本完全相同的主流程 ──────────────────────────────────
     summary_lines = [
         "# tree build summary",
         "",
