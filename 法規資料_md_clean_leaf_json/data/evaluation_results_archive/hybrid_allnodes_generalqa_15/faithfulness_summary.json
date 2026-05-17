@@ -1,8 +1,8 @@
 ﻿{
   "metric": "faithfulness",
-  "average_score": 0.775,
-  "total_questions": 20,
-  "successful_questions": 20,
+  "average_score": 0.7666666666666667,
+  "total_questions": 30,
+  "successful_questions": 30,
   "failed_questions": 0,
   "no_claim_questions": 0,
   "question_type_filter": "general_qa"
