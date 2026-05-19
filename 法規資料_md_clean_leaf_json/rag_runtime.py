@@ -21,6 +21,11 @@ DEFAULT_TOP_K = 3
 DEFAULT_PROMPT_TOP_N = 1
 DEFAULT_MAX_CONTEXT_CHARS = 3000
 DEFAULT_OLLAMA_TIMEOUT = 300
+#========
+TABLE_CHUNK_MIN_CHARS = 30
+TABLE_ADJACENT_WINDOW = 1
+TABLE_EXPANDED_MAX_CHARS = 2500
+#========
 AVAILABLE_MODES = ("hybrid", "leaf", "table", "all_nodes", "800200")
 HYBRID_TEXT_OPTIONS = ("leaf", "all_nodes")
 VECTOR_THRESHOLD = 0.2
@@ -136,6 +141,134 @@ def _query_bm25_scores(keywords: list[str], bm25: BM25Okapi) -> np.ndarray:
     return bm25.get_scores(query_tokens).astype(np.float32)
 
 
+
+#===============
+def _same_table_neighbor(current: dict[str, Any], neighbor: dict[str, Any]) -> bool:
+    """判斷相鄰 metadata 是否屬於同一份表格來源。"""
+    if neighbor.get("doc_type") != "table_chunk":
+        return False
+
+    current_file = str(current.get("file_name", "") or "")
+    neighbor_file = str(neighbor.get("file_name", "") or "")
+    if current_file != neighbor_file:
+        return False
+
+    current_path = str(current.get("path_text", "") or "")
+    neighbor_path = str(neighbor.get("path_text", "") or "")
+
+    # 如果 path_text 兩邊都有值，就要求 path_text 相同，避免跨章節亂併。
+    if current_path and neighbor_path:
+        return current_path == neighbor_path
+
+    return True
+
+
+def _expand_table_chunk_text(
+    metadata: list[dict[str, Any]],
+    idx: int,
+    window: int = TABLE_ADJACENT_WINDOW,
+    max_chars: int = TABLE_EXPANDED_MAX_CHARS,
+) -> str:
+    """把 table chunk 與前後相鄰 chunk 合併，提升表格題 context 完整度。"""
+    current = metadata[idx]
+    collected: list[str] = []
+
+    start = max(0, idx - window)
+    end = min(len(metadata), idx + window + 1)
+
+    for neighbor_idx in range(start, end):
+        neighbor = metadata[neighbor_idx]
+        if not _same_table_neighbor(current, neighbor):
+            continue
+
+        text = str(neighbor.get("text", "") or "").strip()
+        if not text:
+            continue
+
+        relative_pos = neighbor_idx - idx
+        if relative_pos == 0:
+            label = "[matched chunk]"
+        elif relative_pos < 0:
+            label = f"[previous chunk {abs(relative_pos)}]"
+        else:
+            label = f"[next chunk {relative_pos}]"
+
+        collected.append(f"{label}\n{text}")
+
+    expanded_text = "\n\n".join(collected).strip()
+    return expanded_text[:max_chars].strip()
+#===============
+
+
+#===============
+def _tokenize_for_overlap(text: str) -> set[str]:
+    """用簡單 2-gram 做中文 query-chunk overlap，避免依賴特定表格主題。"""
+    normalized = str(text or "").strip()
+    if not normalized:
+        return set()
+    return {normalized[i:i + 2] for i in range(len(normalized) - 1)}
+
+
+def _table_generic_rerank_bonus(question: str, text: str) -> float:
+    """通用型 table chunk reranking，不針對特定表格主題。
+
+    加分邏輯：
+    1. 與問題的字詞／2-gram 重疊越高，加分越多。
+    2. chunk 資訊量越完整，加分越多。
+    3. chunk 看起來像完整列、完整句或完整控制敘述，加分。
+    4. 純標題、導引句、過短內容扣分。
+    """
+    q = str(question or "").strip()
+    t = str(text or "").strip()
+
+    if not t:
+        return -1.0
+
+    bonus = 0.0
+
+    # 1. Query overlap：問題與 chunk 的 2-gram 重疊比例
+    q_tokens = _tokenize_for_overlap(q)
+    t_tokens = _tokenize_for_overlap(t)
+    if q_tokens and t_tokens:
+        overlap = len(q_tokens & t_tokens) / max(len(q_tokens), 1)
+        bonus += min(overlap * 0.35, 0.25)
+
+    # 2. Content density：避免標題型 chunk，偏好資訊量足夠的 chunk
+    text_len = len(t)
+    if text_len >= 150:
+        bonus += 0.12
+    elif text_len >= 80:
+        bonus += 0.08
+    elif text_len >= 50:
+        bonus += 0.04
+    elif text_len < 30:
+        bonus -= 0.30
+
+    # 3. Structural completeness：完整句、條列、欄位式內容加分
+    punctuation_count = sum(t.count(p) for p in ("，", "。", "；", "：", "、", "\n"))
+    if punctuation_count >= 4:
+        bonus += 0.08
+    elif punctuation_count >= 2:
+        bonus += 0.04
+
+    if any(marker in t for marker in ("1.", "2.", "3.", "（一）", "（二）", "（三）", "(一)", "(二)", "(三)", "一、", "二、", "三、")):
+        bonus += 0.06
+
+    # 4. Penalty：常見導引句或無實質內容的 chunk
+    generic_low_value_phrases = (
+        "不在此贅述",
+        "本單元之作業程序及控制重點",
+        "作業程序及控制重點已載於",
+        "詳見",
+        "如下表",
+        "如下",
+    )
+    if any(phrase in t for phrase in generic_low_value_phrases):
+        bonus -= 0.20
+
+    return bonus
+#===============
+
 def run_search(
     question: str,
     model: SentenceTransformer,
@@ -168,24 +301,60 @@ def run_search(
     hybrid: np.ndarray = alpha * v_norm + (1 - alpha) * k_norm
     hybrid[~valid_mask] = 0.0
 
-    top_k_actual = min(top_k, len(hybrid))
-    indices = np.argsort(-hybrid)[:top_k_actual]
+
+    # ========================
+    candidate_k = min(max(top_k * 10, 30), len(hybrid))
+    candidate_indices = np.argsort(-hybrid)[:candidate_k]
+
+    reranked_candidates: list[tuple[float, int]] = []
+
+    for idx in candidate_indices:
+        if hybrid[idx] <= 0.0:
+            continue
+
+        item = metadata[int(idx)]
+        text = str(item.get("text", "") or "").strip()
+
+        # 通用 table short chunk filtering
+        if item.get("doc_type") == "table_chunk" and len(text) < TABLE_CHUNK_MIN_CHARS:
+            continue
+
+        rerank_score = float(hybrid[idx])
+
+        # 通用 table reranking，不針對特定表格主題
+        if item.get("doc_type") == "table_chunk":
+            rerank_score += _table_generic_rerank_bonus(question, text)
+
+        reranked_candidates.append((rerank_score, int(idx)))
+
+    reranked_candidates.sort(key=lambda pair: pair[0], reverse=True)
 
     results: list[dict[str, Any]] = []
-    for rank, idx in enumerate(indices, start=1):
-        if hybrid[idx] <= 0.0:
-            break
+    rank = 1
+
+    for rerank_score, idx in reranked_candidates:
         item = metadata[int(idx)]
+
         results.append(
             {
                 "rank": rank,
                 "score": float(hybrid[idx]),
+                "rerank_score": float(rerank_score),
                 "vector_score": float(v_norm[idx]),
                 "keyword_score": float(k_norm[idx]),
                 "preprocessed_query": combined_query,
+                "source_index": int(idx),
                 **item,
             }
         )
+
+        rank += 1
+
+        if len(results) >= top_k:
+            break
+    # ========================
+
+
 
     return results
 
